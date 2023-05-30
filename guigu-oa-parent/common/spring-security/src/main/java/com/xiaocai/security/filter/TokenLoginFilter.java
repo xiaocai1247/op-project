@@ -6,8 +6,10 @@ import com.xiaocai.common.jwt.JwtHelper;
 import com.xiaocai.common.result.ResponseUtil;
 import com.xiaocai.common.result.Result;
 import com.xiaocai.common.result.ResultCodeEnum;
+import com.xiaocai.security.config.RedisCache;
 import com.xiaocai.security.custom.CustomUser;
 import com.xiaocai.vo.system.LoginVo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -75,7 +77,6 @@ public class TokenLoginFilter extends UsernamePasswordAuthenticationFilter {
         //获取当前用户的权限数据，放到Redis里面 key: username  value: 权限数据
         redisTemplate.opsForValue().set(customUser.getUsername(),
                 JSON.toJSONString(customUser.getAuthorities()));
-
         //返回
         Map<String, Object> map = new HashMap<>();
         map.put("token", token);

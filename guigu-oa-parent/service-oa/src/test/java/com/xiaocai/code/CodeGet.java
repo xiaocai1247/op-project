@@ -52,6 +52,8 @@ public class CodeGet {
         //去掉前缀
         strategy.setTablePrefix("wechat_");
 
+        strategy.setLogicDeleteFieldName("del_flag");//设置逻辑删除
+
         strategy.setNaming(NamingStrategy.underline_to_camel);//数据库表映射到实体的命名策略
 
         strategy.setColumnNaming(NamingStrategy.underline_to_camel);//数据库表字段映射到实体的命名策略
